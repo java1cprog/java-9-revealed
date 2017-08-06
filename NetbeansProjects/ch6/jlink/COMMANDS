@@ -1,0 +1,17 @@
+
+jlink --output primechecker --module-path "jmods;e:/Program Files/Java/jdk-9/jmods" --add-modules "com.jdojo.prime.client,com.jdojo.prime.generic,com.jdojo.prime.faster" --launcher runprimechecker=com.jdojo.prime.client
+
+./java --list-modules
+
+
+jlink --module-path "jmods;e:/Program Files/Java/jdk-9/jmods" --add-modules com.jdojo.prime.client --suggest-providers
+
+jlink --module-path "jmods;e:/Program Files/Java/jdk-9/jmods" --add-modules com.jdojo.prime.client --suggest-providers com.jdojo.prime.PrimeChecker
+
+jlink --module-path "jmods;e:/Program Files/Java/jdk-9/jmods" --add-modules com.jdojo.prime.client --launcher runprimechecker=com.jdojo.prime.client --bind-services --output primecheckerservice
+
+primecheckerservice/bin/runprimechecker
+
+jlink  --module-path "jmods;e:/Program Files/Java/jdk-9/jmods" --compress 2 --strip-debug --add-modules com.jdojo.prime.client --launcher runprimechecker=com.jdojo.prime.client --bind-services --output primechecker
+
+jimage list primechecker/lib/modules
