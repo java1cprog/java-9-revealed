@@ -1,0 +1,16 @@
+javac -d com.jdojo.intruder_mod/build/classes com.jdojo.intruder_mod/src/com.jdojo.intruder/classes/com/jdojo/intruder/TestNonOpen.java
+
+
+java --module-path "com.jdojo.address_mod/dist;com.jdojo.intruder_mod/build/classes" --add-modules com.jdojo.address --module com.jdojo.intruder/com.jdojo.intruder.TestNonOpen
+
+
+#add opens
+java --add-opens com.jdojo.address/com.jdojo.address=com.jdojo.intruder --module-path "com.jdojo.address_mod/dist;com.jdojo.intruder_mod/build/classes" --add-modules com.jdojo.address --module com.jdojo.intruder/com.jdojo.intruder.TestNonOpen
+
+# error
+java --module-path com.jdojo.address_mod/dist --class-path com.jdojo.intruder_mod/build/classes --add-modules com.jdojo.address com.jdojo.intruder.TestNonOpen
+
+# --permit-illegal-access (this option do not worked JDK 9 [180])
+java --module-path com.jdojo.address_mod/dist --class-path com.jdojo.intruder_mod/build/classes --add-modules com.jdojo.address com.jdojo.intruder.TestNonOpen --permit-illegal-access com.jdojo.intruder.TestNonOpen
+
+

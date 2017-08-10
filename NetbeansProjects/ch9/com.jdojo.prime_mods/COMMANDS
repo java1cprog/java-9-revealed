@@ -1,0 +1,20 @@
+javac --module-version 1.0 -d bin/com.jdojo.prime  $(find -name *.java)
+
+#  "--add-exports" do not nothing
+javac --add-exports java.base/sun.util.logging=com.jdojo.prime  --module-version 1.0 -d bin/com.jdojo.prime  $(find -name *.java)
+
+#  "--add-exports" do not nothing
+javac --add-exports java.base/sun.util.logging=ALL-UNNAMED  --module-version 1.0 -d bin/com.jdojo.prime  $(find -name *.java)
+
+#  "--add-reads" do not nothing
+javac --add-reads java.sql=com.jdojo.prime --add-modules java.sql --module-version 1.0 -d bin/com.jdojo.prime  $(find -name *.java)
+
+#  "--add-opens" do not nothing
+javac --module-version 1.0 -d bin/com.jdojo.prime  $(find -name *.java)
+
+#these commands are used with java execution command
+java -jar distr/com.jdojo.prime.jar --dry-run --add-opens com.jdojo.prime/com.jdojo.prime=java.base 
+
+# "--add-exports" do not recognized
+jar --add-exports java.base/sun.util.logging=com.jdojo.prime --create --file distr/com.jdojo.prime.jar  -C bin/com.jdojo.prime .
+

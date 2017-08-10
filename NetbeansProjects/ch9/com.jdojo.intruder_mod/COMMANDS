@@ -1,0 +1,13 @@
+#Error
+javac --module-path com.jdojo.intro/dist -d com.jdojo.intruder_mod/build/classes com.jdojo.intruder/src/module-info.java com.jdojo.intruder/src/com/jdojo/intruder/TestNonExported.java
+
+#It is worked
+javac --add-modules com.jdojo.intro --add-exports com.jdojo.intro/com.jdojo.intro=com.jdojo.intruder --module-path com.jdojo.intro_mod/dist -d com.jdojo.intruder_mod/build/classes com.jdojo.intruder_mod/src/com.jdojo.intruder/classes/module-info.java com.jdojo.intruder_mod/src/com.jdojo.intruder/classes/com/jdojo/intruder/TestNonExported.java
+
+jar -c -f com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar  $(find com.jdojo.intruder_mod/build -name *.class)
+
+#Error class reading
+java --module-path "com.jdojo.intro_mod/dist;com.jdojo.intruder_mod/build/classes" --add-modules com.jdojo.intro --add-exports com.jdojo.intro/com.jdojo.intro=com.jdojo.intruder --module com.jdojo.intruder/com.jdojo.intruder.TestNonExported
+
+#It is worked (!)
+java --add-reads com.jdojo.intruder=com.jdojo.intro --module-path "com.jdojo.intro_mod/dist;com.jdojo.intruder_mod/build/classes" --add-modules com.jdojo.intro --add-exports com.jdojo.intro/com.jdojo.intro=com.jdojo.intruder --module com.jdojo.intruder/com.jdojo.intruder.TestNonExported

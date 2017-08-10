@@ -1,0 +1,24 @@
+javac -d com.jdojo.intruder_mod/build/classes com.jdojo.intruder_mod/src/com.jdojo.intruder/classes/com/jdojo/intruder/TestManifestAttributes.java
+
+jar --create --file com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar --manifest "com.jdojo.intruder_mod/src/com.jdojo.intruder/classes/META-INF/MANIFEST.MF" -C com.jdojo.intruder_mod/build/classes .
+
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar
+
+java -jar com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar
+
+#it is worked (JDK9 180)
+java  --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
+
+--illegal-access=warn
+java --illegal-access=warn --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
+
+#--illegal-access=deny
+java --illegal-access=deny --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
+
+# --illegal-access=debug
+java --illegal-access=debug --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
+
+java --add-opens java.base/java.lang=ALL-UNNAMED --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
+
+# --illegal-access=deny
+java --illegal-access=deny --add-opens java.base/java.lang=ALL-UNNAMED --class-path com.jdojo.intruder_mod/dist/com.jdojo.intruder.jar com.jdojo.intruder.TestManifestAttributes
